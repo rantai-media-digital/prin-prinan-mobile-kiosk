@@ -1,21 +1,24 @@
 {
   "build": {
-    "preview": {
+    "production": {
+      "autoIncrement": true,
+      "distribution" :  "internal",
+      "environment": "preview",
       "android": {
         "buildType": "apk"
       }
     },
-    "preview2": {
+    "development": {
+       "environment": "preview",
+       "distribution" :  "internal",
+      "developmentClient": true,
+      "autoIncrement": true,
       "android": {
-        "gradleCommand": ":app:assembleRelease"
+        "buildType": "apk"
       }
-    },
-    "preview3": {
-      "developmentClient": true
-    },
-    "preview4": {
-      "distribution": "internal"
-    },
-    "production": {}
+    }
+  },
+  "cli": {
+    "appVersionSource": "local"
   }
 }

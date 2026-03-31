@@ -2,7 +2,7 @@
   "expo": {
     "scheme": "prinprinan",
     "name": "prin-prinan",
-    "slug": "prin-prinan",
+    "slug": "print-mobile-kiosk",
     "version": "1.0.0",
     "web": {
       "favicon": "./assets/favicon.png",
@@ -14,7 +14,8 @@
     "plugins": [
       "expo-router",
       "expo-camera",
-      "expo-video"
+      "expo-video",
+      "expo-build-properties"
     ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -31,21 +32,32 @@
       "supportsTablet": true
     },
     "android": {
+      "usesCleartextTraffic": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
       "permissions": [
         "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO"
       ],
-      "package": "com.anonymous.prinprinan"
+      "package": "com.anonymous.prinprinan",
+      "versionCode": 7
     },
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "f12789d2-9697-4b9f-a55b-dddec8c11499"
+        "projectId": "bd379aa1-723d-419a-ba7f-c12eb6b4a2c8"
       }
+    },
+    "owner": "puzzlesremixed",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/bd379aa1-723d-419a-ba7f-c12eb6b4a2c8"
     }
   }
 }
