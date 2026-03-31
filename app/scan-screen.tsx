@@ -16,6 +16,7 @@ import {
   View,
 } from 'react-native';
 import { AppSettings, getSettings } from '../utils/settings';
+import { fetchTimeout } from '../utils/fetchTimeout';
 
 interface Asset {
   filename: string;
@@ -144,9 +145,7 @@ export default function ScanScreen() {
 
       const dispatchUrl = `http://${currentSettings.baseUrl}/api/print-job/${jobId}/dispatch`;
 
-      const dispatchResponse = await fetch(dispatchUrl, {
-        method: 'POST',
-      });
+      const dispatchResponse = await fetchTimeout(dispatchUrl, { timeout: 5000, method: 'POST' });
 
       if (!dispatchResponse.ok) {
         throw new Error('Gagal mengirimkan pekerjaan ke printer.');
@@ -155,7 +154,7 @@ export default function ScanScreen() {
       router.replace('/(modal)/success');
     } catch (error: any) {
       console.error('Error during dispatch:', error);
-      Alert.alert('Error', error.message || 'Terjadi kesalahan saat mencetak.');
+      Alert.alert('Error', 'Terjadi kesalahan saat mencetak.');
       setProcessing(false);
     }
   };
@@ -212,18 +211,18 @@ export default function ScanScreen() {
     setIsLoading(true);
     Vibration.vibrate();
 
+    const currentSettings = await getSettings();
+    if (!currentSettings.baseUrl) {
+      Alert.alert('Printer Belum Diatur', 'Harap atur Base URL printer di halaman Pengaturan.', [
+        { text: 'OK', onPress: handleClose },
+      ]);
+      return;
+    }
+    setSettings(currentSettings as ExtendedAppSettings);
+    const url = `http://${currentSettings.baseUrl}/api/print-job/${data}`;
+
     try {
-      const currentSettings = await getSettings();
-      setSettings(currentSettings as ExtendedAppSettings);
-
-      if (!currentSettings.baseUrl) {
-        Alert.alert('Printer Belum Diatur', 'Harap atur Base URL printer di halaman Pengaturan.', [
-          { text: 'OK', onPress: handleClose },
-        ]);
-        return;
-      }
-
-      const response = await fetch(`http://${currentSettings.baseUrl}/api/print-job/${data}`);
+      const response = await fetchTimeout(url, { timeout: 5000, method: 'GET' });
       const result: ApiResponse = await response.json();
 
       if (!response.ok || !result.detail) {
@@ -249,9 +248,7 @@ export default function ScanScreen() {
       setFlowStep('selection');
     } catch (error: any) {
       console.error('Failed to fetch print job', error);
-      Alert.alert('Error', error.message || 'Tidak dapat terhubung ke server.', [
-        { text: 'OK', onPress: handleClose },
-      ]);
+      Alert.alert('Error', 'Terdapat kesalahan dalam sistem.');
     } finally {
       setIsLoading(false);
     }
@@ -436,14 +433,14 @@ export default function ScanScreen() {
                   <TouchableOpacity
                     onPress={() => handleSelectMethod('qris')}
                     disabled={!settings?.enableQris || !settings?.qrisImageUrl}
-                    className={`flex-row items-center rounded-2xl border p-6 shadow-sm 
+                    className={`flex-row items-center rounded-2xl border p-6 shadow-sm
                             ${
                               !settings?.enableQris || !settings?.qrisImageUrl
                                 ? 'border-slate-100 bg-slate-50 opacity-60'
                                 : 'border-slate-200 bg-white active:bg-slate-50'
                             }`}>
                     <View
-                      className={`h-12 w-12 items-center justify-center rounded-full 
+                      className={`h-12 w-12 items-center justify-center rounded-full
                              ${!settings?.enableQris || !settings?.qrisImageUrl ? 'bg-slate-200' : 'bg-red-100'}`}>
                       <Ionicons
                         name="qr-code-outline"
