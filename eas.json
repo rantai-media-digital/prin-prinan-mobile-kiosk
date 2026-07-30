@@ -2,20 +2,22 @@
   "build": {
     "production": {
       "autoIncrement": true,
-      "distribution" :  "internal",
+      "distribution": "internal",
       "environment": "preview",
       "android": {
         "buildType": "apk"
-      }
+      },
+      "channel": "production"
     },
     "development": {
-       "environment": "preview",
-       "distribution" :  "internal",
+      "environment": "preview",
+      "distribution": "internal",
       "developmentClient": true,
       "autoIncrement": true,
       "android": {
         "buildType": "apk"
-      }
+      },
+      "channel": "development"
     }
   },
   "cli": {

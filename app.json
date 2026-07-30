@@ -15,7 +15,14 @@
       "expo-router",
       "expo-camera",
       "expo-video",
-      "expo-build-properties"
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ]
     ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -44,7 +51,7 @@
         "android.permission.RECORD_AUDIO"
       ],
       "package": "com.anonymous.prinprinan",
-      "versionCode": 7
+      "versionCode": 11
     },
     "extra": {
       "router": {},
