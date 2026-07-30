@@ -143,7 +143,7 @@ export default function ScanScreen() {
     try {
       const currentSettings = await getSettings();
 
-      const dispatchUrl = `http://${currentSettings.baseUrl}/api/print-job/${jobId}/dispatch`;
+      const dispatchUrl = `${currentSettings.baseUrl}/api/print-job/${jobId}/dispatch`;
 
       const dispatchResponse = await fetchTimeout(dispatchUrl, { timeout: 5000, method: 'POST' });
 
@@ -248,7 +248,8 @@ export default function ScanScreen() {
       setFlowStep('selection');
     } catch (error: any) {
       console.error('Failed to fetch print job', error);
-      Alert.alert('Error', 'Terdapat kesalahan dalam sistem.');
+
+      Alert.alert('Error', 'Terdapat kesalahan dalam sistem. Fetch URL : ' + url);
     } finally {
       setIsLoading(false);
     }

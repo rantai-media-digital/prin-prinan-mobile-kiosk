@@ -95,7 +95,7 @@ const SettingsScreen = () => {
             keyboardType="url"
           />
           <Text className="mt-2 text-xs text-slate-400">
-            Alamat IP dan port server printer tanpa http:// dan trailing slash. Contoh : 172.0.0.1:8000
+            Alamat dan port server printer tanpa trailing slash. Contoh : http://172.0.0.1:8000, https://example.com
           </Text>
         </View>
 
