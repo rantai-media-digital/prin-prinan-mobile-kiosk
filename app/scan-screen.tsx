@@ -163,7 +163,7 @@ export default function ScanScreen() {
     if (!printJob || !settings) return;
 
     try {
-      const checkUrl = `http://${settings.baseUrl}/api/print-job/${printJob.id}`;
+      const checkUrl = `${settings.baseUrl}/api/print-job/${printJob.id}`;
       const response = await fetch(checkUrl);
       const result: ApiResponse = await response.json();
 
@@ -219,7 +219,7 @@ export default function ScanScreen() {
       return;
     }
     setSettings(currentSettings as ExtendedAppSettings);
-    const url = `http://${currentSettings.baseUrl}/api/print-job/${data}`;
+    const url = `${currentSettings.baseUrl}/api/print-job/${data}`;
 
     try {
       const response = await fetchTimeout(url, { timeout: 5000, method: 'GET' });
