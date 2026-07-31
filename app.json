@@ -12,6 +12,18 @@
       "tsconfigPaths": true
     },
     "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#FFFFFF",
+          "image": "./assets/logo/app_logo_print_rmd-white.png",
+          "dark": {
+            "image": "./assets/logo/app_logo_print_rmd-white.png",
+            "backgroundColor": "#FFFFFF"
+          },
+          "imageWidth": 200
+        }
+      ],
       "expo-router",
       "expo-camera",
       "expo-video",
@@ -25,10 +37,10 @@
       ]
     ],
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo/app_logo_print_rmd-white.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/logo/app_logo_print_rmd-white.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -41,7 +53,7 @@
     "android": {
       "usesCleartextTraffic": true,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/logo/app_logo_print_rmd-white.png",
         "backgroundColor": "#ffffff"
       },
       "permissions": [
@@ -50,7 +62,7 @@
         "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO"
       ],
-      "package": "com.anonymous.prinprinan",
+      "package": "com.rantaimediadigital.prinprinan",
       "versionCode": 11
     },
     "extra": {
@@ -59,7 +71,7 @@
         "projectId": "bd379aa1-723d-419a-ba7f-c12eb6b4a2c8"
       }
     },
-    "owner": "puzzlesremixed",
+    "owner": "rantaimediadigital-org",
     "runtimeVersion": {
       "policy": "appVersion"
     },
